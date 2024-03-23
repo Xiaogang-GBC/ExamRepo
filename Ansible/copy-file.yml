@@ -1,0 +1,11 @@
+---
+- hosts: nodes
+  become: yes
+  tasks:
+    - name: Copy a file to remote servers
+      ansible.builtin.copy:
+        src: /path/to/local/file
+        dest: /path/to/remote/location
+        owner: remote_user
+        group: remote_group
+        mode: '0644'

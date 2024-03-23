@@ -1,0 +1,25 @@
+---
+- hosts: nodes
+  become: yes
+  tasks:
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Clone repository
+      git:
+        repo: https://github.com/your_repository/node_application.git
+        dest: /path/to/clone
+        clone: yes
+        update: yes
+
+    - name: Install application dependencies
+      shell: npm install
+      args:
+        chdir: /path/to/clone
+
+    - name: Start the Node application
+      shell: node app.js &
+      args:
+        chdir: /path/to/clone
