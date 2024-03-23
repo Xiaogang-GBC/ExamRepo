@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-app2
+  name: my-app2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: my-app2
+    spec:
+      containers:
+      - image: my-web-app:latest
+        name: my-web-app
+        resources: {}
+        env:
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: my-secret
+                key: myExam
+
+status: {}
+
+

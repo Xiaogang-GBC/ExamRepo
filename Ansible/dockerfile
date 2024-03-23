@@ -1,0 +1,18 @@
+# Use Alpine Linux as the base image
+FROM alpine:latest
+
+# Install OpenSSH
+RUN apk add --no-cache openssh \
+    && echo "root:root" | chpasswd
+
+# Create the SSH host keys needed by OpenSSH
+RUN ssh-keygen -A
+
+# Allow root login with password
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Optional: Expose port 22 for SSH access
+EXPOSE 22
+
+# Start the SSH daemon in the foreground
+CMD ["/usr/sbin/sshd", "-D"]

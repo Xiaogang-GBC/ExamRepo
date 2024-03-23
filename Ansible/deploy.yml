@@ -1,0 +1,6 @@
+    - name: Clone application from GitHub
+      ansible.builtin.git:
+        repo: 'https://github.com/Xiaogang-GBC/ExamRepo.git'
+        dest: /opt/node-app
+        clone: yes
+        update: yes
